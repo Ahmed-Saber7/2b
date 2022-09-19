@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        #create sequence for Letters Of Guarantee-->
+        <record model="ir.sequence" id="letter_guarantee_sequence">
+            <field name="name">Letters Of Guarantee Sequence</field>
+            <field name="code">letter.guarantee</field>
+            <field name="padding">4</field>
+            <field name="prefix">letter/guarantee/</field>
+        </record>
+    </data>
+</odoo>

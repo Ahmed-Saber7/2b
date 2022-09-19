@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="letter_guarantee_form" model="ir.ui.view">
+            <field name="name">letter.guarantee.form</field>
+            <field name="model">letter.guarantee</field>
+            <field name="arch" type="xml">
+                <form string="Letters Of Guarantee">
+                    <header>
+                        <button name="submit_for_approval" states="draft" string="Submit for Approval" type="object"
+                                class="oe_highlight"/>
+
+                        <button name="approve" states="to_be_approved" string="Approve" type="object"
+                                class="oe_highlight"/>
+
+                        <button name="reject" states="to_be_approved" string="Reject" type="object"/>
+
+                        <button name="reset_to_draft" states="cancel" string="Reset to draft" type="object"
+                                class="oe_highlight"/>
+
+                        <button name="cancel" string="Cancel" type="object" states="draft,approve,reject"/>
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Request Name" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="bank" attrs="{'readonly': [('state','!=','draft')]}" />
+                                <field name="letter_guarantee_date"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="letter_guarantee_number_old"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="letter_guarantee_number_new"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="letter_guarantee_type"
+                                      attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="organization_id"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+
+                            </group>
+                            <group>
+                                <field name="status"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="department_id"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="expiry_date"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="letter_guarantee_value"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="marge"
+                                       attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="marge_value" invisible="1"/>
+                                <field name="current_user" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="letter_guarantee_tree" model="ir.ui.view">
+            <field name="name">letter.guarantee.tree</field>
+            <field name="model">letter.guarantee</field>
+            <field name="arch" type="xml">
+                <tree string="Letters Of Guarantee" decoration-danger="state == 'reject'"
+                      decoration-success="state == 'approve'"
+                      decoration-info="state in ('to_be_approved','cancel')">
+
+                    <field name="state"/>
+                    <field name="name"/>
+                    <field name="bank"/>
+                    <field name="letter_guarantee_date"/>
+                    <field name="letter_guarantee_number_old"/>
+                    <field name="letter_guarantee_number_new"/>
+                    <field name="letter_guarantee_type"/>
+                    <field name="organization_id"/>
+                    <field name="status"/>
+                    <field name="department_id"/>
+                    <field name="expiry_date"/>
+                    <field name="letter_guarantee_type"/>
+                    <field name="marge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="letter_guarantee_action" model="ir.actions.act_window">
+            <field name="name">Letters Of Guarantee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">letter.guarantee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                    Create your First Letters Of Guarantee !
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="letter_guarantee_menu" name="Letters Of Guarantee"
+                  parent="account.menu_finance_entries_management"
+                  action="letter_guarantee_action" sequence="105"/>
+
+    </data>
+</odoo>

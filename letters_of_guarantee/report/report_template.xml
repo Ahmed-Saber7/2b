@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <template id="report_letters_guarantee">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <tr t-foreach="docs" t-as="o"/>
+                    <t t-if="o.current_user.lang =='en_US'">
+                        <h3 style="text-align: center; fontsize:16px;">Letters Of Guarantee To /
+                            <span t-esc="datetime.date.today()"/>
+                        </h3>
+                        <style type="text/css">
+                            .tg {border-collapse:collapse;border-spacing:0;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial,
+                            sans-serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial,
+                            sans-serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg .tg-2d32{background-color:#c0c0c0;color:#091124;text-align:left;vertical-align:top}
+                            .tg
+                            .tg-62qn{background-color:#c0c0c0;color:#091124;font-weight:bold;text-align:center;vertical-align:top}
+                            .tg .tg-y6fn{background-color:#c0c0c0;text-align:left;vertical-align:top}
+                            .tg .tg-0lax{text-align:left;vertical-align:top}
+                            .tg .tg-0laxx{background-color:#c0c0c0;text-align:left;vertical-align:top}
+                        </style>
+                        <table class="tg" style="undefined;table-layout: fixed; width: 1473px">
+                            <colgroup>
+                                <col style="width: 82px"/>
+                                <col style="width: 84px"/>
+                                <col style="width: 130px"/>
+                                <col style="width: 130px"/>
+                                <col style="width: 120px"/>
+                                <col style="width: 240px"/>
+                                <col style="width: 63px"/>
+                                <col style="width: 110px"/>
+                                <col style="width: 84px"/>
+                                <col style="width: 124px"/>
+                                <col style="width: 122px"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="tg-y6fn">Bank</th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">Date</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">Lett. Guar. Old Num.</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">Lett. Guar. New Num.</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">Type</span>
+                                    </th>
+                                    <th class="tg-62qn">
+                                        <span style="font-weight:500;color:#091124">Organization</span>
+                                    </th>
+                                    <th class="tg-2d32">
+                                        <span style="font-weight:500">Status</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">Department</span>
+                                    </th>
+                                    <th class="tg-y6fn">Expiry Date</th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">Value</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">Marge</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="line">
+                                    <tr>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.bank"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_date"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_number_old"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_number_new"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_type"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.organization_id.name"/>
+                                        </td>
+
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() &lt; line.expiry_date">
+                                                <td class="tg-0lax">
+                                                    <span>Running</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() &gt; line.expiry_date">
+                                                <td class="tg-0laxx">
+                                                    <span>Finished</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() == line.expiry_date">
+                                                <td class="tg-0laxx">
+                                                    <span>Finished</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <td class="tg-0lax">
+                                                <span t-field="line.expiry_date"/>
+                                            </td>
+                                        </t>
+
+                                        <td class="tg-0lax">
+                                            <span t-field="line.department_id.name"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.expiry_date"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_value"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.marge_value"/>
+                                        </td>
+
+                                    </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="o.current_user.lang !='en_US'">
+                        <h3 style="text-align: center; fontsize:16px;">خطابات الضمان لـ
+                            /
+                            <span t-esc="datetime.date.today()"/>
+                        </h3>
+
+                        <style type="text/css">
+                            .tg {border-collapse:collapse;border-spacing:0;}
+                            .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial,
+                            sans-serif;font-size:14px;
+                            overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial,
+                            sans-serif;font-size:14px;
+                            font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+                            .tg
+                            .tg-2d32{background-color:#c0c0c0;color:#091124;text-align:right;vertical-align:top;font-size:14px}
+                            .tg
+                            .tg-62qn{background-color:#c0c0c0;color:#091124;font-weight:bold;text-align:center;vertical-align:top;font-size:14px}
+                            .tg .tg-y6fn{background-color:#c0c0c0;text-align:right;vertical-align:top;font-size:14px}
+                            .tg .tg-0lax{text-align:right;vertical-align:top}
+                            .tg .tg-0laxx{background-color:#c0c0c0;text-align:right;vertical-align:top}
+                        </style>
+                        <table class="tg" style="undefined;table-layout: fixed; width: 1473px" dir="RTL">
+                            <colgroup>
+                                <col style="width: 82px"/>
+                                <col style="width: 84px"/>
+                                <col style="width: 130px"/>
+                                <col style="width: 130px"/>
+                                <col style="width: 120px"/>
+                                <col style="width: 240px"/>
+                                <col style="width: 63px"/>
+                                <col style="width: 110px"/>
+                                <col style="width: 84px"/>
+                                <col style="width: 124px"/>
+                                <col style="width: 122px"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="tg-y6fn">البنك</th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">تاريخ الخطاب</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">رقم الخطاب القديم</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">رقم الخطاب الجديد</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">النوع</span>
+                                    </th>
+                                    <th class="tg-62qn">
+                                        <span style="font-weight:500;color:#091124">الجهة</span>
+                                    </th>
+                                    <th class="tg-2d32">
+                                        <span style="font-weight:500">الموقف</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500;font-style:normal">الادارة</span>
+                                    </th>
+                                    <th class="tg-y6fn">تاريخ الانتهاء</th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">قيمه الخطاب</span>
+                                    </th>
+                                    <th class="tg-y6fn">
+                                        <span style="font-weight:500">المارج</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="line">
+                                    <tr>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.bank"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_date"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_number_old"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_number_new"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_type"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.organization_id.name"/>
+                                        </td>
+
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() &lt; line.expiry_date">
+                                                <td class="tg-0lax">
+                                                    <span>Running</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() &gt; line.expiry_date">
+                                                <td class="tg-0laxx">
+                                                    <span>Finished</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-if="line.expiry_date">
+                                            <t t-if="datetime.date.today() == line.expiry_date">
+                                                <td class="tg-0laxx">
+                                                    <span>Finished</span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <td class="tg-0lax">
+                                                <span t-field="line.expiry_date"/>
+                                            </td>
+                                        </t>
+
+                                        <td class="tg-0lax">
+                                            <span t-field="line.department_id.name"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.expiry_date"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.letter_guarantee_value"/>
+                                        </td>
+                                        <td class="tg-0lax">
+                                            <span t-field="line.marge_value"/>
+                                        </td>
+
+                                    </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+
+
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>
