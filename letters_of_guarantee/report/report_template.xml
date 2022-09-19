@@ -7,6 +7,7 @@
                 <t t-call="web.external_layout">
                     <div class="page">
                         <tr t-foreach="docs" t-as="o"/>
+                        <br/>
                         <h3 style="text-align: center; fontsize:16px;">Letters Of Guarantee To /
                             <span t-esc="datetime.date.today()"/>
                         </h3>
