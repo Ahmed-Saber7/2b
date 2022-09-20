@@ -89,6 +89,7 @@
                     <field name="department_id"/>
                     <field name="expiry_date"/>
                     <field name="letter_guarantee_type"/>
+                    <field name="letter_guarantee_value"/>
                     <field name="marge"/>
                 </tree>
             </field>
